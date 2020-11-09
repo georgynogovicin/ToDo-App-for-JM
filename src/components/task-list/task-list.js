@@ -3,10 +3,13 @@ import './task-list.css';
 
 import Task from '../task';
 
-const TaskList = ( { todos } ) => {
+const TaskList = ( { todos, itemDestroy } ) => {
     const items = todos.map((item) => {
-        return <Task {...item} />
+        const {id, ...props } = item;
+        return <Task key={id} {...props} itemDestroy={() => itemDestroy(id)} />
     });
+
+
 
     return (
         <ul className="todo-list">
