@@ -41,25 +41,4 @@ export default class App extends Component {
             <Footer />
         </section>
     };
-}
-
-
-// const App = () => {
-    
-//     const todoData = [
-//         {label: 'Completed', addingDate: new Date(), id: 1},
-//         {label: 'Editing', status: 'editing', addingDate: new Date(), id: 2},
-//         {label: 'Active', addingDate: new Date(), id: 3},
-//     ];
-//     return (
-//         <section className="todoapp">
-//             <Header />
-//             <section className="main">
-//                 <TaskList todos={todoData} />
-//             </section>
-//             <Footer />
-//         </section>
-//     );
-// };
-
-// export default App;
+};
