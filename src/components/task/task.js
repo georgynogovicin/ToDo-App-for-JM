@@ -5,22 +5,9 @@ import './task';
 
 export default class Task extends Component {
 
-
-  state = {
-    done: false
-  }
-  
-  onDoneClick = () => {
-    this.setState(({ done }) => {
-      return { done: !done }
-    });
-  };
-
-
   render () {
 
-    const { label, status, addingDate, id, itemDestroy } = this.props;
-    const { done } = this.state;
+    const { label, status, addingDate, id, done, itemDestroy, onToggleDone } = this.props;
 
     let taskClass = status;
 
@@ -30,7 +17,9 @@ export default class Task extends Component {
     return (
         <li className={taskClass}>
             <div className="view">
-              <input className="toggle" type="checkbox" onClick={this.onDoneClick}></input>
+              <input className="toggle" type="checkbox" 
+                    onClick={() => onToggleDone(id)}
+              ></input>
               <label>
                 <span className="description">{label}</span>
                 <span className="created">{formatDistanceToNow(addingDate)}</span>

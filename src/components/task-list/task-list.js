@@ -3,10 +3,13 @@ import './task-list.css';
 
 import Task from '../task';
 
-const TaskList = ( { todos, itemDestroy } ) => {
+const TaskList = ( { todos, itemDestroy, onToggleDone } ) => {
     const items = todos.map((item) => {
         const {id, ...props } = item;
-        return <Task key={id} {...props} itemDestroy={() => itemDestroy(id)} />
+        return <Task key={id} {...props} 
+                    itemDestroy={() => itemDestroy(id)} 
+                    onToggleDone={() => onToggleDone(id)}
+                />
     });
 
 
