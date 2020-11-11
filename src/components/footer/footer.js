@@ -5,12 +5,14 @@ import Filters from '../filters';
 
 const Footer = (props) => {
     
-    const { todoCount } = props;
+    const { todoCount, clearComplete } = props;
     return (
         <footer className="footer">
           <span className="todo-count">{ todoCount } items left</span>
           <Filters />
-          <button className="clear-completed">Clear completed</button>
+          <button className="clear-completed"
+                  onClick={ () => clearComplete() }
+          >Clear completed</button>
         </footer>
     );
 };

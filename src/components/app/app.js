@@ -58,6 +58,16 @@ export default class App extends Component {
         })
     };
 
+    clearComplete = () => {
+        this.setState(({ todoData }) => {
+            const newArr = todoData.filter(item => !item.done)
+            
+            return {
+                todoData: newArr
+            }
+        })
+    }
+
     onToggleDone = (id) => {
         this.setState(( { todoData } ) => {
             const idx = todoData.findIndex(item => item.id === id)
@@ -86,7 +96,9 @@ export default class App extends Component {
                     onToggleDone={ this.onToggleDone }
                  />
             </section>
-            <Footer todoCount={ todoCount } />
+            <Footer todoCount={ todoCount }
+                    clearComplete={ this.clearComplete }
+            />
         </section>
     };
 };
