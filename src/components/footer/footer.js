@@ -3,16 +3,14 @@ import './footer.css';
 
 import Filters from '../filters';
 
-const Footer = (props) => {
+const Footer = ({ todoCount, clearComplete, changeFilter }) => {
     
-    const { todoCount, clearComplete } = props;
     return (
         <footer className="footer">
           <span className="todo-count">{ todoCount } items left</span>
-          <Filters />
+          <Filters changeFilter={ changeFilter }/>
           <button className="clear-completed"
-                  onClick={ () => clearComplete() }
-          >Clear completed</button>
+                  onClick={ () => clearComplete() } >Clear completed</button>
         </footer>
     );
 };

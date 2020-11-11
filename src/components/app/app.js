@@ -16,17 +16,24 @@ export default class App extends Component {
             this.createTodoItem('Completed'),
             this.createTodoItem('Editing'),
             this.createTodoItem('Active')
-        ]
+        ],
+        filterValue: 'All'
     };
 
     
-
+    changeFilter = ( filter ) => {
+        this.setState({
+            filterValue: filter
+        });
+    };
+    
     createTodoItem ( label ) {
         return {
             label: label,
             addingDate: new Date(),
             id: this.currentId++,
-            done: false
+            done: false,
+            editing: false
         };
     };
 
@@ -58,6 +65,24 @@ export default class App extends Component {
         })
     };
 
+    itemEdit = (id) => {
+        this.setState(({todoData}) => {
+            const idx = todoData.findIndex(item => item.id === id);
+            const oldItem = todoData[idx];
+            const newItem = { ...oldItem, editing: !oldItem.editing };
+
+            const newArr = [
+                ...todoData.slice(0, idx),
+                newItem,
+                ...todoData.slice(idx + 1)
+            ];
+
+            return {
+                todoData: newArr
+            }
+        });
+    };
+
     clearComplete = () => {
         this.setState(({ todoData }) => {
             const newArr = todoData.filter(item => !item.done)
@@ -85,19 +110,22 @@ export default class App extends Component {
     };
 
     render() {
-        const { todoData } = this.state;
+        const { todoData, filterValue } = this.state;
         const todoCount = todoData.length - todoData.filter((item) => item.done).length;
 
         return <section className="todoapp">
             <Header addItem={ this.addItem } /> 
             <section className="main">
-                <TaskList todos={ todoData } 
+                <TaskList todos={ todoData }
+                    filterValue={ filterValue } 
                     itemDestroy={ this.itemDestroy }
                     onToggleDone={ this.onToggleDone }
+                    itemEdit={ this.itemEdit }
                  />
             </section>
             <Footer todoCount={ todoCount }
                     clearComplete={ this.clearComplete }
+                    changeFilter={ this.changeFilter }
             />
         </section>
     };
