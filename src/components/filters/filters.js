@@ -4,54 +4,31 @@ import './filters.css';
 
 export default class Filters extends Component {
 
-    // state = {
-    //     items: [
-    //         { id: 1, active: false },
-    //         { id: 2, active: false },
-    //         { id: 3, active: false },
-    //     ]
-    // }
-
-    // toggleClass = ( id ) => {
-    //     this.setState(({items}) => {
-    //         const idx = item.findIndex(item => item.id = 1);
-
-    //         const oldItem = items[idx];
-    //         const newItem = { ...oldItem, active: !oldItem.active };
-    //         const newArr = [ ...items.slice(0, idx),
-    //                             newItem,
-    //                             ...items.slice(idx + 1)                
-    //         ];
-
-    //         return {
-    //             items: newArr
-    //         }
-    //     });
-    // }
+    
 
     onFilterClick = (event) => {
-        this.props.changeFilter(event.target.innerText);
-
-        
+        this.props.changeFilter(event.target.dataset.value);
     }
 
     render() {
+        const { filterValue } = this.props;
         return (
             <ul className="filters"
                 onClick={ this.onFilterClick }
             >
                 <li>
-                    <button className="selected"
-                    >All</button>
+                    <button className={filterValue === "All" ? "selected" : ""} data-value="All">All</button>
                 </li>
                 <li>
-                    <button>Active</button>
+                    <button className={filterValue === "Active" ? "selected" : ""} data-value="Active">Active</button>
                 </li>
                  <li>
-                    <button>Completed</button>
+                    <button className={filterValue === "Completed" ? "selected" : ""} data-value="Completed">Completed</button>
                 </li>
             </ul>
         );
     };
 };
+
+
 

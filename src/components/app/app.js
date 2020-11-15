@@ -126,6 +126,7 @@ export default class App extends Component {
             <Footer todoCount={ todoCount }
                     clearComplete={ this.clearComplete }
                     changeFilter={ this.changeFilter }
+                    filterValue={ filterValue }
             />
         </section>
     };
