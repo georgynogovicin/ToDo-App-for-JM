@@ -1,12 +1,37 @@
 import React, { Component } from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import './task';
+import PropTypes from 'prop-types';
+import './task.css';
+
 
 
 export default class Task extends Component {
 
-  render () {
 
+  static defaultProps = {
+    label: 'Active',
+    id: 0,
+    done: false,
+    editing: false,
+    addingDate: new Date(),
+    itemDestroy: () => {},
+    onToggleDone: () => {},
+    itemEdit: () => {},
+  };
+
+  static propTypes = {
+    label: PropTypes.string,
+    id: PropTypes.number,
+    done: PropTypes.bool,
+    editing: PropTypes.bool,
+    addingDate: PropTypes.instanceOf(Date),
+    itemDestroy: PropTypes.func.isRequired,
+    onToggleDone: PropTypes.func.isRequired,
+    itemEdit: PropTypes.func.isRequired,
+  };
+
+  render () {
+    
     const { label, addingDate, id, done, editing, itemDestroy, onToggleDone, itemEdit } = this.props;
 
     let taskClass = null;

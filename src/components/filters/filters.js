@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './filters.css';
 
 export default class Filters extends Component {
 
     
+    static defaultProps = {
+        filterValue: 'All',
+        changeFilter: () => {},
+    };
+
+    static propTypes = {
+        filterValue: PropTypes.string,
+        changeFilter: PropTypes.func.isRequired
+    };
+
 
     onFilterClick = (event) => {
         this.props.changeFilter(event.target.dataset.value);
@@ -12,6 +23,7 @@ export default class Filters extends Component {
 
     render() {
         const { filterValue } = this.props;
+        
         return (
             <ul className="filters"
                 onClick={ this.onFilterClick }
@@ -29,6 +41,7 @@ export default class Filters extends Component {
         );
     };
 };
+
 
 
 

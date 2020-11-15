@@ -1,5 +1,6 @@
 import React from 'react';
 import './task-list.css';
+import PropTypes from 'prop-types';
 
 import Task from '../task';
 
@@ -37,5 +38,14 @@ const TaskList = ( { todos, itemDestroy, onToggleDone, itemEdit, filterValue } )
         </ul>
     );
 };
+
+TaskList.defaultProps = {
+    id: 0,
+};
+
+TaskList.propTypes = {
+    id: PropTypes.number,
+}
+
 
 export default TaskList;

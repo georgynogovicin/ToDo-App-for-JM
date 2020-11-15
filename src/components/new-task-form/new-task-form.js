@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import "./new-task-form.css";
+import PropTypes from 'prop-types';
 
 export default class NewTaskForm extends Component {
+
+    static defaultProps = {
+        addItem: () => {},
+    };
+
+    static propTypes = {
+        addItem: PropTypes.func.isRequired,
+    }
 
     state = {
         label: ''
