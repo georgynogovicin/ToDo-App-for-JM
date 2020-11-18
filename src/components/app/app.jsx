@@ -85,7 +85,7 @@ export default class App extends Component {
     return {
       label,
       addingDate: new Date(),
-      id: this.currentId + 1,
+      id: this.currentId + Math.floor(Math.random() * 100),
       done: false,
       editing: false,
     };

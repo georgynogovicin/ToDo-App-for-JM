@@ -8,7 +8,7 @@ export default class NewTaskForm extends Component {
   };
 
   static propTypes = {
-    addItem: PropTypes,
+    addItem: PropTypes.func,
   };
 
   state = {

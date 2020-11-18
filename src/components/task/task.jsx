@@ -27,7 +27,6 @@ const Task = ({ label, addingDate, id, done, editing, itemDestroy, onToggleDone,
 
 Task.defaultProps = {
   label: 'Active',
-  id: 0,
   done: false,
   editing: false,
   addingDate: new Date(),
@@ -35,7 +34,7 @@ Task.defaultProps = {
 
 Task.propTypes = {
   label: PropTypes.string,
-  id: PropTypes.number,
+  id: PropTypes.number.isRequired,
   done: PropTypes.bool,
   editing: PropTypes.bool,
   addingDate: PropTypes.instanceOf(Date),

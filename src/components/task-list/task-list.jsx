@@ -25,6 +25,7 @@ const TaskList = ({ todos, itemDestroy, onToggleDone, itemEdit, filterValue }) =
     return (
       <Task
         key={id}
+        id={id}
         {...props}
         itemDestroy={() => itemDestroy(id)}
         onToggleDone={() => onToggleDone(id)}
@@ -37,13 +38,11 @@ const TaskList = ({ todos, itemDestroy, onToggleDone, itemEdit, filterValue }) =
 };
 
 TaskList.defaultProps = {
-  id: 0,
   filterValue: 'All',
   label: 'Active',
 };
 
 TaskList.propTypes = {
-  id: PropTypes.number,
   todos: PropTypes.instanceOf(Array).isRequired,
   itemDestroy: PropTypes.func.isRequired,
   onToggleDone: PropTypes.func.isRequired,
