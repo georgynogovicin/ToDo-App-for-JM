@@ -3,11 +3,14 @@ import { formatDistanceToNow } from 'date-fns';
 import PropTypes from 'prop-types';
 import './task.css';
 
-const Task = ({ label, addingDate, id, done, editing, itemDestroy, onToggleDone, itemEdit }) => {
-  let taskClass = null;
+const classNames = require('classnames');
 
-  if (done) taskClass = 'completed';
-  if (editing) taskClass = 'editing';
+const Task = ({ label, addingDate, id, done, editing, itemDestroy, onToggleDone, itemEdit }) => {
+  const taskClass = classNames({
+    '': true,
+    completed: done,
+    editing: editing,
+  });
 
   return (
     <li className={taskClass}>
@@ -25,19 +28,12 @@ const Task = ({ label, addingDate, id, done, editing, itemDestroy, onToggleDone,
   );
 };
 
-Task.defaultProps = {
-  label: 'Active',
-  done: false,
-  editing: false,
-  addingDate: new Date(),
-};
-
 Task.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  done: PropTypes.bool,
-  editing: PropTypes.bool,
-  addingDate: PropTypes.instanceOf(Date),
+  done: PropTypes.bool.isRequired,
+  editing: PropTypes.bool.isRequired,
+  addingDate: PropTypes.instanceOf(Date).isRequired,
   itemDestroy: PropTypes.func.isRequired,
   onToggleDone: PropTypes.func.isRequired,
   itemEdit: PropTypes.func.isRequired,

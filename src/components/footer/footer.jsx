@@ -16,18 +16,11 @@ const Footer = ({ todoCount, clearComplete, changeFilter, filterValue }) => {
   );
 };
 
-Footer.defaultProps = {
-  todoCount: 0,
-  clearComplete: () => {},
-  changeFilter: () => {},
-  filterValue: 'All',
-};
-
 Footer.propTypes = {
-  todoCount: PropTypes.number,
-  clearComplete: PropTypes.func,
-  changeFilter: PropTypes.func,
-  filterValue: PropTypes.string,
+  todoCount: PropTypes.number.isRequired,
+  clearComplete: PropTypes.func.isRequired,
+  changeFilter: PropTypes.func.isRequired,
+  filterValue: PropTypes.string.isRequired,
 };
 
 export default Footer;

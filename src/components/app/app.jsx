@@ -15,8 +15,10 @@ export default class App extends Component {
   };
 
   changeFilter = (filter) => {
-    this.setState({
-      filterValue: filter,
+    this.setState(() => {
+      return {
+        filterValue: filter,
+      };
     });
   };
 
@@ -33,12 +35,9 @@ export default class App extends Component {
 
   itemDestroy = (id) => {
     this.setState(({ todoData }) => {
-      const result = todoData.reduce((acc, item) => {
-        if (item.id !== id) {
-          acc.push(item);
-        }
-        return acc;
-      }, []);
+      const result = todoData.filter((item) => {
+        return item.id !== id;
+      });
       return {
         todoData: result,
       };
