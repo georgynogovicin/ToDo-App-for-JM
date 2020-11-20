@@ -15,7 +15,7 @@ const Task = ({ label, addingDate, id, done, editing, itemDestroy, onToggleDone,
   return (
     <li className={taskClass}>
       <div className="view">
-        <input className="toggle" type="checkbox" onClick={() => onToggleDone(id)} />
+        <input className="toggle" type="checkbox" checked={done} onClick={() => onToggleDone(id)} />
         <label>
           <span className="description">{label}</span>
           <span className="created">{formatDistanceToNow(addingDate)}</span>

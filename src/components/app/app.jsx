@@ -10,7 +10,11 @@ export default class App extends Component {
   currentId = 100;
 
   state = {
-    todoData: [this.createTodoItem('Completed'), this.createTodoItem('Editing'), this.createTodoItem('Active')],
+    todoData: [
+      this.createTodoItem('Добавить задачу'),
+      this.createTodoItem('Отметить задачу'),
+      this.createTodoItem('Удалить задачу'),
+    ],
     filterValue: 'All',
   };
 
@@ -43,6 +47,17 @@ export default class App extends Component {
       };
     });
   };
+
+  // fintItemInData = (id) => {
+  //   const { todoData } = this.state;
+  //   const idx = todoData.findIndex((item) => item.id === id);
+  //   const oldItem = todoData[idx];
+
+  //   return {
+  //     idx,
+  //     oldItem
+  //   };
+  // }
 
   itemEdit = (id) => {
     this.setState(({ todoData }) => {
