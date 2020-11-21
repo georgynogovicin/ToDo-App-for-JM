@@ -5,6 +5,7 @@ import './app.css';
 import Header from '../header';
 import TaskList from '../task-list';
 import Footer from '../footer';
+import values from '../../helpers/values';
 
 export default class App extends Component {
   currentId = 100;
@@ -15,7 +16,7 @@ export default class App extends Component {
       this.createTodoItem('Отметить задачу'),
       this.createTodoItem('Удалить задачу'),
     ],
-    filterValue: 'All',
+    filterValue: values.filters.all,
   };
 
   changeFilter = (filter) => {
@@ -48,24 +49,16 @@ export default class App extends Component {
     });
   };
 
-  // fintItemInData = (id) => {
-  //   const { todoData } = this.state;
-  //   const idx = todoData.findIndex((item) => item.id === id);
-  //   const oldItem = todoData[idx];
-
-  //   return {
-  //     idx,
-  //     oldItem
-  //   };
-  // }
+  toggleItemValue = (id, key, dataArr) => {
+    const idx = dataArr.findIndex((item) => item.id === id);
+    const oldItem = dataArr[idx];
+    const newItem = { ...oldItem, [key]: !oldItem[key] };
+    return [...dataArr.slice(0, idx), newItem, ...dataArr.slice(idx + 1)];
+  };
 
   itemEdit = (id) => {
     this.setState(({ todoData }) => {
-      const idx = todoData.findIndex((item) => item.id === id);
-      const oldItem = todoData[idx];
-      const newItem = { ...oldItem, editing: !oldItem.editing };
-
-      const newArr = [...todoData.slice(0, idx), newItem, ...todoData.slice(idx + 1)];
+      const newArr = this.toggleItemValue(id, values.status.editing, todoData);
 
       return {
         todoData: newArr,
@@ -85,10 +78,8 @@ export default class App extends Component {
 
   onToggleDone = (id) => {
     this.setState(({ todoData }) => {
-      const idx = todoData.findIndex((item) => item.id === id);
-      const oldItem = todoData[idx];
-      const newItem = { ...oldItem, done: !oldItem.done };
-      const newArr = [...todoData.slice(0, idx), newItem, ...todoData.slice(idx + 1)];
+      const newArr = this.toggleItemValue(id, values.status.done, todoData);
+
       return {
         todoData: newArr,
       };

@@ -4,6 +4,10 @@ const values = {
     active: 'Active',
     completed: 'Completed',
   },
+  status: {
+    editing: 'editing',
+    done: 'done',
+  },
 };
 
 export default values;
