@@ -1,6 +1,7 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import PropTypes from 'prop-types';
+import TaskTimer from '../task-timer';
 import './task.css';
 
 const classNames = require('classnames');
@@ -17,8 +18,9 @@ const Task = ({ label, addingDate, id, done, editing, itemDestroy, onToggleDone,
       <div className="view">
         <input className="toggle" type="checkbox" checked={done} onClick={() => onToggleDone(id)} />
         <label>
-          <span className="description">{label}</span>
-          <span className="created">{formatDistanceToNow(addingDate)}</span>
+          <span className="title">{label}</span>
+          <TaskTimer />
+          <span className="description">{formatDistanceToNow(addingDate)}</span>
         </label>
         <button type="button" aria-label="Edit" className="icon icon-edit" onClick={() => itemEdit(id)} />
         <button type="button" aria-label="Delete" className="icon icon-destroy" onClick={() => itemDestroy(id)} />
