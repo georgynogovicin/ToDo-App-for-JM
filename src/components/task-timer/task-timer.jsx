@@ -4,6 +4,7 @@ import './task-timer.css';
 
 export default class TaskTimer extends Component {
   state = {
+    start: 0,
     timer: 0,
     timerStatus: false,
   };
@@ -13,9 +14,11 @@ export default class TaskTimer extends Component {
   }
 
   timer() {
-    this.setState(({ timer }) => {
+    this.setState(({ start }) => {
+      const newTime = Date.now() - start;
+
       return {
-        timer: timer + 1,
+        timer: newTime,
       };
     });
   }
@@ -24,10 +27,14 @@ export default class TaskTimer extends Component {
     const { timerStatus } = this.state;
 
     if (!timerStatus) {
-      this.timerID = setInterval(() => this.timer(), 1000);
-      this.setState({
-        timerStatus: true,
+      this.setState(({ timer }) => {
+        return {
+          timerStatus: true,
+          timer,
+          start: Date.now() - timer,
+        };
       });
+      this.timerID = setInterval(() => this.timer(), 1);
     }
   }
 
@@ -44,9 +51,9 @@ export default class TaskTimer extends Component {
       <span className="description">
         <button type="button" className="icon icon-play" aria-label="play" onClick={() => this.timerOn()} />
         <button type="button" className="icon icon-pause" aria-label="pause" onClick={() => this.timerOff()} />
-        <span className="timer">{`${Math.trunc((timer / 60 / 60) % 60)}:${Math.trunc((timer / 60) % 60)}:${
-          timer % 60
-        }`}</span>
+        <span className="timer">{`${Math.trunc((timer / 1000 / 60 / 60) % 60)}:${Math.trunc(
+          (timer / 1000 / 60) % 60
+        )}:${Math.trunc((timer / 1000) % 60)}`}</span>
       </span>
     );
   }
