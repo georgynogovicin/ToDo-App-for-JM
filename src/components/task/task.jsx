@@ -16,7 +16,7 @@ const Task = ({ label, addingDate, id, done, editing, itemDestroy, onToggleDone,
   return (
     <li className={taskClass}>
       <div className="view">
-        <input className="toggle" type="checkbox" checked={done} onClick={() => onToggleDone(id)} />
+        <input className="toggle" type="checkbox" checked={done} onChange={() => onToggleDone(id)} />
         <label>
           <span className="title">{label}</span>
           <TaskTimer />
