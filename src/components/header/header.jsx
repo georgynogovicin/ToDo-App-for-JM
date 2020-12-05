@@ -1,53 +1,39 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './header.css';
 
-export default class Header extends Component {
-  static propTypes = {
-    addItem: PropTypes.func.isRequired,
-  };
+function Header({ addItem }) {
+  const [label, setLabel] = useState('');
 
-  state = {
-    label: '',
-  };
-
-  onLabelChange = (event) => {
-    this.setState({
-      label: event.target.value,
-    });
-  };
-
-  onKeyDown = (event) => {
-    const { label } = this.state;
-    const { addItem } = this.props;
+  function onKeyDown(event) {
     if (event.code === 'Enter') {
       if (label !== '') {
         addItem(label);
-        this.setState({
-          label: '',
-        });
+        setLabel('');
       }
     }
-  };
-
-  render() {
-    const { label } = this.state;
-
-    return (
-      <header className="header">
-        <h1>todos</h1>
-        <form className="new-todo-form">
-          <input
-            className="new-todo"
-            placeholder="Task"
-            onChange={this.onLabelChange}
-            onKeyDown={this.onKeyDown}
-            value={label}
-          />
-          <input className="new-todo-form__timer" placeholder="Min" />
-          <input className="new-todo-form__timer" placeholder="Sec" />
-        </form>
-      </header>
-    );
   }
+
+  return (
+    <header className="header">
+      <h1>todos</h1>
+      <form className="new-todo-form">
+        <input
+          className="new-todo"
+          placeholder="Task"
+          onChange={(event) => setLabel(event.target.value)}
+          onKeyDown={onKeyDown}
+          value={label}
+        />
+        <input className="new-todo-form__timer" placeholder="Min" />
+        <input className="new-todo-form__timer" placeholder="Sec" />
+      </form>
+    </header>
+  );
 }
+
+Header.propTypes = {
+  addItem: PropTypes.func.isRequired,
+};
+
+export default Header;
